@@ -1,23 +1,33 @@
 <template>
-  <div class="log-viewer">
-    <el-card shadow="hover" class="log-card">
-      <template #header>
-        <div class="card-header">
-          <span>实时运行日志</span>
-          <el-button size="small" type="primary" @click="fetchLogs" :icon="Refresh">刷新日志</el-button>
-        </div>
-      </template>
-      <div class="log-content" ref="logContainer">
+  <v-card elevation="2" rounded="xl" class="border log-viewer-card" color="surface">
+    <v-card-title class="d-flex align-center py-4 px-6 font-weight-bold">
+      <span>实时运行日志</span>
+      <v-spacer></v-spacer>
+      <v-btn
+        prepend-icon="mdi-refresh"
+        variant="tonal"
+        color="primary"
+        rounded="pill"
+        size="small"
+        @click="fetchLogs"
+      >
+        刷新日志
+      </v-btn>
+    </v-card-title>
+    
+    <v-divider></v-divider>
+
+    <v-card-text class="pa-0">
+      <div class="log-content bg-black text-green-accent-3 pa-4 font-weight-medium" ref="logContainer">
         <pre>{{ logs }}</pre>
       </div>
-    </el-card>
-  </div>
+    </v-card-text>
+  </v-card>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import axios from 'axios'
-import { Refresh } from '@element-plus/icons-vue'
 
 const logs = ref('')
 const logContainer = ref<HTMLElement | null>(null)
@@ -27,7 +37,6 @@ const fetchLogs = async () => {
   try {
     const res = await axios.get('/api/logs')
     logs.value = res.data.logs || '暂无日志输出...'
-    // scroll to bottom
     setTimeout(() => {
       if (logContainer.value) {
         logContainer.value.scrollTop = logContainer.value.scrollHeight
@@ -49,21 +58,12 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-.card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
 .log-content {
-  background-color: #1e1e1e;
-  color: #00ff00;
-  padding: 15px;
-  border-radius: 4px;
   height: 60vh;
   overflow-y: auto;
-  font-family: monospace;
-  font-size: 13px;
-  line-height: 1.5;
+  font-family: 'Consolas', 'Monaco', monospace;
+  font-size: 14px;
+  line-height: 1.6;
 }
 pre {
   margin: 0;

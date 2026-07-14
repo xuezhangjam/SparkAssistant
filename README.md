@@ -51,6 +51,12 @@ python tray_runner.py
 - **数据本地化**：本系统所有的抖音会话凭证、Cookie 数据和客户档案(`clients.json`)都会独立存储在项目运行目录下的隔离沙盒（`user_data_*`）中。
 - **绝不上传**：默认配置了严格的 `.gitignore` 规则，确保您的所有私有数据绝不会被意外推送到公共代码仓库。
 
+## ☕ 支持与赞赏 (Sponsor)
+
+如果这个项目帮助你节省了大量的人工运营时间，或者让你学到了 GTK4 与 Playwright 的自动化架构，欢迎请作者喝杯奶茶！你的支持是我初三毕业暑假持续更新维护的最大动力！
+
+<img src="donate.png" width="300" alt="赞赏码">
+
 ## 🤝 致谢 (Acknowledgments)
 
 本项目的设计与核心代码逻辑由作者主导研发，并在开发过程中得到了 **Google Antigravity** 智能协作系统 (Advanced Agentic AI) 的架构辅助与极客编程支持。

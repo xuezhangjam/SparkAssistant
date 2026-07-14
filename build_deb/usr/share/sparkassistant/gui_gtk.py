@@ -333,6 +333,12 @@ class DouyinApp(Adw.ApplicationWindow):
         btn_settings.connect("clicked", self.on_settings)
         right_header.pack_end(btn_settings)
         
+        btn_sponsor = Gtk.Button(icon_name="starred-symbolic")
+        btn_sponsor.add_css_class("flat")
+        btn_sponsor.set_tooltip_text("支持与赞赏")
+        btn_sponsor.connect("clicked", self.on_sponsor)
+        right_header.pack_end(btn_sponsor)
+        
         right_box.append(right_header)
         
         # 操作按钮区

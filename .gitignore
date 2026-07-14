@@ -1,26 +1,12 @@
-# 虚拟环境
+node-v*
+build_deb/
+build_rpm/
+web_ui/node_modules/
+web_ui/dist/
 .venv/
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
-
-# 缓存与编译文件
 __pycache__/
-*.py[cod]
-*$py.class
-*.so
-
-# 本地数据与隐私文件（绝对不能公开！）
+*.deb
+*.rpm
 clients.json
-user_data*/
+douyin_playwright.log
 user_data_*/
-
-# 日志
-*.log
-
-# 系统/IDE
-.DS_Store
-.idea/
-.vscode/

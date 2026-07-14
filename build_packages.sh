@@ -1,7 +1,8 @@
 #!/bin/bash
+set -e
 # 一键打包脚本：生成 .deb 和 .rpm 包
 
-VERSION="1.0.2"
+VERSION="1.1.0"
 APP_NAME="sparkassistant"
 MAINTAINER="Zhaozikai110812 <zhaozikai110812@users.noreply.github.com>"
 DESCRIPTION="基于 GTK4 的抖音商业全自动防风控群发与代续系统"
@@ -13,9 +14,15 @@ mkdir -p build_deb/usr/bin
 mkdir -p build_deb/usr/share/applications
 mkdir -p build_deb/DEBIAN
 
+echo "=== 编译 Web 前端 ==="
+export PATH=$PWD/node-v22.2.0-linux-x64/bin:$PATH
+(cd web_ui && npm install && npm install @rolldown/binding-linux-x64-gnu -f && npm run build)
+
 echo "=== 复制核心代码与资源 ==="
 # 复制源文件
-cp -r *.py requirements.txt build_deb/usr/share/sparkassistant/
+cp -r *.py requirements.txt donate.png build_deb/usr/share/sparkassistant/
+mkdir -p build_deb/usr/share/sparkassistant/web_ui
+cp -r web_ui/dist build_deb/usr/share/sparkassistant/web_ui/
 cp sparkassistant.desktop build_deb/usr/share/applications/
 cp sparkassistant-launcher.sh build_deb/usr/bin/sparkassistant
 chmod +x build_deb/usr/bin/sparkassistant

@@ -3,6 +3,8 @@ import os
 import json
 import subprocess
 import threading
+import webbrowser
+import atexit
 import gi
 
 gi.require_version('Gtk', '4.0')
@@ -340,6 +342,12 @@ class DouyinApp(Adw.ApplicationWindow):
         btn_sponsor.connect("clicked", self.on_sponsor)
         right_header.pack_end(btn_sponsor)
         
+        btn_web = Gtk.Button(icon_name="applications-internet-symbolic")
+        btn_web.add_css_class("flat")
+        btn_web.set_tooltip_text("启动 Web 管理大屏")
+        btn_web.connect("clicked", self.on_web_ui)
+        right_header.pack_end(btn_web)
+        
         right_box.append(right_header)
         
         # 操作按钮区
@@ -495,8 +503,19 @@ class DouyinApp(Adw.ApplicationWindow):
 
     # --- 按钮事件 ---
     def on_settings(self, btn):
-        dialog = SettingsDialog(self)
+        dialog = SettingsDialog(transient_for=self)
         dialog.present()
+        
+    def on_web_ui(self, btn):
+        if getattr(self, "web_process", None) is None or self.web_process.poll() is not None:
+            self.append_log("🚀 正在拉起 FastAPI Web 管理端...")
+            self.web_process = subprocess.Popen([os.path.join(os.getcwd(), ".venv", "bin", "python"), "web_server.py"])
+            atexit.register(self.web_process.terminate)
+            # Give it a second to start
+            GLib.timeout_add_seconds(1, lambda: webbrowser.open("http://localhost:8000"))
+        else:
+            self.append_log("🌐 Web 管理端已在运行中，正在为您打开浏览器...")
+            webbrowser.open("http://localhost:8000")
 
     def on_add_client(self, btn):
         dialog = ClientDialog(self, is_edit=False, client_id=self.get_next_client_id())

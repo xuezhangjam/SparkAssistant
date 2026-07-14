@@ -1,0 +1,26 @@
+# 虚拟环境
+.venv/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# 缓存与编译文件
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# 本地数据与隐私文件（绝对不能公开！）
+clients.json
+user_data*/
+user_data_*/
+
+# 日志
+*.log
+
+# 系统/IDE
+.DS_Store
+.idea/
+.vscode/

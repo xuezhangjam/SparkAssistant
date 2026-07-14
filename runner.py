@@ -1,5 +1,5 @@
 import asyncio
-from playwright.async_api import async_playwright
+from playwright.async_api import async_playwright, Error as PlaywrightError
 
 import sys
 import json
@@ -308,6 +308,18 @@ if __name__ == "__main__":
     if len(sys.argv) < 2:
         print("用法: python runner.py <client_id>")
         sys.exit(1)
-    ret = asyncio.run(main(sys.argv[1]))
-    if ret is not None:
-        sys.exit(ret)
+    try:
+        ret = asyncio.run(main(sys.argv[1]))
+        if ret is not None:
+            sys.exit(ret)
+    except PlaywrightError as e:
+        if "has been closed" in str(e) or "TargetClosedError" in str(type(e)):
+            print("\n==================================================")
+            print("🛑 任务中止：检测到您已手动关闭浏览器，运行自动终止。")
+            sys.exit(1)
+        else:
+            raise
+    except KeyboardInterrupt:
+        print("\n==================================================")
+        print("🛑 任务中止：用户手动停止运行。")
+        sys.exit(1)

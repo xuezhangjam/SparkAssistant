@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=火花助手
+GenericName=Spark Assistant
+Comment=基于 GTK4 的抖音商业全自动防风控群发与代续系统
+Exec=/usr/bin/sparkassistant
+Icon=sparkassistant
+Terminal=true
+Categories=Utility;Network;
+StartupNotify=true

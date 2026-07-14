@@ -1,9 +1,9 @@
-# 抖音商业自动化控制台 (Douyin Auto GUI)
+# 火花助手 (Spark Assistant)
 
 ![GTK4 UI](https://img.shields.io/badge/UI-GTK4%20%7C%20Libadwaita-blue)
 ![Playwright](https://img.shields.io/badge/Automation-Playwright-green)
 
-这是一款基于 GTK4 (Libadwaita) 和 Playwright 构建的抖音网页版自动化商业运维工具。专为具有多客户运营需求的团队设计，主要用于**全自动、防风控的批量代续火花**和自动化群发操作。
+这是一款基于 GTK4 (Libadwaita) 和 Playwright 构建的网页版自动化商业运维工具。专为具有多客户运营需求的团队设计，主要用于**全自动、防风控的批量代续火花**和自动化群发操作。
 
 <!-- UI_SCREENSHOT_PLACEHOLDER -->
 > *在此处插入主界面的运行截图*

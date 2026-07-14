@@ -6,7 +6,7 @@
 这是一款基于 GTK4 (Libadwaita) 和 Playwright 构建的网页版自动化商业运维工具。专为具有多客户运营需求的团队设计，主要用于**全自动、防风控的批量代续火花**和自动化群发操作。
 
 <!-- UI_SCREENSHOT_PLACEHOLDER -->
-> <img width="2026" height="1424" alt="image" src="https://github.com/user-attachments/assets/f5139595-d1ef-47f6-87ad-394ef93a4b96" />
+> <img width="1050" height="750" alt="image" src="https://github.com/user-attachments/assets/96ad5802-90af-425f-9ab0-aebeca5ff0fa" />
 
 
 ## 🌟 核心特性

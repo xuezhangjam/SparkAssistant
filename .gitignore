@@ -2,7 +2,6 @@ node-v*
 build_deb/
 build_rpm/
 web_ui/node_modules/
-web_ui/dist/
 .venv/
 __pycache__/
 *.deb

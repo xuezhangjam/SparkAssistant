@@ -511,7 +511,8 @@ class DouyinApp(Adw.ApplicationWindow):
             self.append_log("🚀 正在拉起 FastAPI Web 管理端...")
             base_dir = os.path.dirname(os.path.abspath(__file__))
             venv_python = os.path.join(base_dir, ".venv", "bin", "python")
-            python_exe = venv_python if os.path.exists(venv_python) else sys.executable
+            global_venv = os.path.expanduser("~/.local/share/SparkAssistant/venv/bin/python")
+            python_exe = venv_python if os.path.exists(venv_python) else (global_venv if os.path.exists(global_venv) else sys.executable)
             self.web_process = subprocess.Popen([python_exe, os.path.join(base_dir, "web_server.py")])
             atexit.register(self.web_process.terminate)
             
@@ -598,7 +599,8 @@ class DouyinApp(Adw.ApplicationWindow):
         self.textbuffer.set_text("") # 清空日志
         base_dir = os.path.dirname(os.path.abspath(__file__))
         venv_python = os.path.join(base_dir, ".venv", "bin", "python")
-        python_exe = venv_python if os.path.exists(venv_python) else sys.executable
+        global_venv = os.path.expanduser("~/.local/share/SparkAssistant/venv/bin/python")
+        python_exe = venv_python if os.path.exists(venv_python) else (global_venv if os.path.exists(global_venv) else sys.executable)
         cmd = [python_exe, os.path.join(base_dir, script_name)] + args
         self.append_log(f"🚀 开始执行: {' '.join(cmd)}\n" + "="*50)
         

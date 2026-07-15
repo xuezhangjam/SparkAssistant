@@ -49,12 +49,15 @@ async def run_client(request: Request):
     
     base_dir = os.path.dirname(os.path.abspath(__file__))
     venv_python = os.path.join(base_dir, ".venv", "bin", "python")
-    python_exe = venv_python if os.path.exists(venv_python) else sys.executable
+    global_venv = os.path.expanduser("~/.local/share/SparkAssistant/venv/bin/python")
+    python_exe = venv_python if os.path.exists(venv_python) else (global_venv if os.path.exists(global_venv) else sys.executable)
+    
+    log_file = open("douyin_playwright.log", "a")
     if cid:
-        subprocess.Popen([python_exe, os.path.join(base_dir, "runner.py"), cid], env=env)
+        subprocess.Popen([python_exe, os.path.join(base_dir, "runner.py"), cid], env=env, stderr=log_file)
         return {"status": "started", "cid": cid}
     else:
-        subprocess.Popen([python_exe, os.path.join(base_dir, "scheduler.py")], env=env)
+        subprocess.Popen([python_exe, os.path.join(base_dir, "scheduler.py")], env=env, stderr=log_file)
         return {"status": "started_all"}
 
 @app.get("/api/logs")

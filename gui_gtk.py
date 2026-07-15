@@ -733,9 +733,10 @@ class MyApp(Adw.Application):
             win = DouyinApp(self)
             # 尝试启动托盘
             if self.tray_process is None or self.tray_process.poll() is not None:
+                base_dir = os.path.dirname(os.path.abspath(__file__))
                 self.tray_process = subprocess.Popen(
-                    [os.path.join(os.getcwd(), ".venv", "bin", "python"), "tray_runner.py"],
-                    cwd=os.path.join(os.getcwd())
+                    [sys.executable, os.path.join(base_dir, "tray_runner.py")],
+                    cwd=base_dir
                 )
         win.present()
 
